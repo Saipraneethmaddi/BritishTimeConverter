@@ -1,5 +1,7 @@
 package com.smartbear.assessment.services;
 
+import com.smartbear.assessment.exceptions.CustomException;
+import com.smartbear.assessment.exceptions.ErrorCode;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,22 +11,22 @@ public class BritishTimeConversionService {
             "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
     private static final String[] TENS = {"twenty", "thirty", "forty", "fifty"};
 
-    public String getBritishTime(String timeString) {
+    public String getBritishTime(String timeString) throws CustomException {
         timeString = timeString.trim();
-        if(timeString.length()>5) return "Invalid time";
+        if(timeString.length()>5) throw new CustomException(ErrorCode.INCORRECT_TIME_STRING_LENGTH);
 
         String[] timeSplit = timeString.split(":");
-        if(timeSplit.length!=2) return "Invalid time";
+        if(timeSplit.length!=2) throw new CustomException(ErrorCode.INCORRECT_TIME_FORMAT);
 
         int hours, minutes;
         try {
             hours = Integer.parseInt(timeSplit[0]);
             minutes = Integer.parseInt(timeSplit[1]);
         } catch (NumberFormatException e) {
-            return "Invalid time due to "+e.getMessage();
+            throw new CustomException(ErrorCode.INVALID_HOURS_MINUTES);
         }
 
-        if(hours>12 || hours<0 || minutes>59 || minutes<0) return "Invalid time";
+        if(hours>12 || hours<0 || minutes>59 || minutes<0) throw new CustomException(ErrorCode.HOURS_MINUTES_OUT_OF_RANGE);
 
         if(minutes==0) {
             if(hours==0) return "midnight";

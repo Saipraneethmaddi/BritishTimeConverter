@@ -1,5 +1,6 @@
 package com.smartbear.assessment.controllers;
 
+import com.smartbear.assessment.exceptions.CustomException;
 import com.smartbear.assessment.services.BritishTimeConversionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,11 @@ public class TimeController {
 
     @GetMapping("/convert")
     public ResponseEntity<?> convertTime(@RequestParam String rawTime) {
-        return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
+        try {
+            return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
+        } catch (CustomException e) {
+            return new ResponseEntity<>(e.getErrorCode().getMessage(), e.getErrorCode().getHttpStatus());
+        }
     }
 
 }
