@@ -17,6 +17,7 @@ public class TimeController {
         this.britishTimeConversionService = britishTimeConversionService;
     }
 
+    //Controller to receive API requests and provide appropriate responses
     @GetMapping("/convert")
     public ResponseEntity<?> convertTime(@RequestParam String rawTime) {
         try {
