@@ -13,7 +13,7 @@ public class BritishTimeConversionService {
 
     public String getBritishTime(String timeString) throws CustomException {
         timeString = timeString.trim();
-        if(timeString.length()>5) throw new CustomException(ErrorCode.INCORRECT_TIME_STRING_LENGTH);
+        if(timeString.length()<3 || timeString.length()>5) throw new CustomException(ErrorCode.INCORRECT_TIME_STRING_LENGTH);
 
         String[] timeSplit = timeString.split(":");
         if(timeSplit.length!=2) throw new CustomException(ErrorCode.INCORRECT_TIME_FORMAT);
