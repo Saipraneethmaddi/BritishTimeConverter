@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller to receive API request with endpoint prefix of '/time' and provide appropriate responses
+ */
 @RestController
 @RequestMapping("/time")
 public class TimeController {
@@ -17,15 +20,8 @@ public class TimeController {
         this.britishTimeConversionService = britishTimeConversionService;
     }
 
-    //Controller to receive API requests and provide appropriate responses
     @GetMapping("/convert")
     public ResponseEntity<?> convertTime(@RequestParam String rawTime) throws CustomException {
-//        try {
-//            return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
-//        } catch (CustomException e) {
-//            return new ResponseEntity<>(e.getErrorCode().getMessage(), e.getErrorCode().getHttpStatus());
-//        }
-
         return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
     }
 

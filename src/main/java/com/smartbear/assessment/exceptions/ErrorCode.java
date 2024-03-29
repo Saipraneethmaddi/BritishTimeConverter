@@ -3,7 +3,9 @@ package com.smartbear.assessment.exceptions;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-//Class to map http statuses and error messages in all the error scenarios
+/**
+ * Enum to map http statuses and error messages in all the error scenarios
+ */
 @Getter
 public enum ErrorCode {
     INCORRECT_TIME_STRING_LENGTH("Time string cannot be more than 5 characters", HttpStatus.BAD_REQUEST),

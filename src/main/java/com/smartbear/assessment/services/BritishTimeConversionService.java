@@ -4,6 +4,9 @@ import com.smartbear.assessment.exceptions.CustomException;
 import com.smartbear.assessment.exceptions.ErrorCode;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service that has all the business logic to convert 12-hour format time to verbal format
+ */
 @Service
 public class BritishTimeConversionService {
 
