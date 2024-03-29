@@ -43,10 +43,14 @@ public class TimeControllerTest {
         HttpStatus outputHttpStatus = exceptionToBeThrown.getErrorCode().getHttpStatus();
 
         Mockito.doThrow(exceptionToBeThrown).when(britishTimeConversionService).getBritishTime(input);
-        ResponseEntity<?> responseEntity = timeController.convertTime(input);
 
-        Assertions.assertEquals(output, responseEntity.getBody());
-        Assertions.assertEquals(outputHttpStatus, responseEntity.getStatusCode());
+        Assertions.assertThrows(CustomException.class, () -> timeController.convertTime(input));
+        try {
+            timeController.convertTime(input);
+        } catch (CustomException e) {
+            Assertions.assertEquals(output, e.getErrorCode().getMessage());
+            Assertions.assertEquals(outputHttpStatus, e.getErrorCode().getHttpStatus());
+        }
     }
 
 }

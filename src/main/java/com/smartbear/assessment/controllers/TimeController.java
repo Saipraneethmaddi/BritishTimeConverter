@@ -19,12 +19,14 @@ public class TimeController {
 
     //Controller to receive API requests and provide appropriate responses
     @GetMapping("/convert")
-    public ResponseEntity<?> convertTime(@RequestParam String rawTime) {
-        try {
-            return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
-        } catch (CustomException e) {
-            return new ResponseEntity<>(e.getErrorCode().getMessage(), e.getErrorCode().getHttpStatus());
-        }
+    public ResponseEntity<?> convertTime(@RequestParam String rawTime) throws CustomException {
+//        try {
+//            return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
+//        } catch (CustomException e) {
+//            return new ResponseEntity<>(e.getErrorCode().getMessage(), e.getErrorCode().getHttpStatus());
+//        }
+
+        return ResponseEntity.ok(britishTimeConversionService.getBritishTime(rawTime));
     }
 
 }
